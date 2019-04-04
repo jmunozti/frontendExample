@@ -1,4 +1,5 @@
 let app = {} || app;
+app.images = [];
 
 app.animateCSS = (element, animationName, callback) => {
     const node = document.querySelector(element);
@@ -22,23 +23,17 @@ app.userSelected = (email) => {
     data.results.map(user => {
         if (user.email == email) {
 
-            app.animateCSS('.mainImage', 'fadeOut', () => {
-                $('.mainImage').css('background-image', "url('" + user.picture.large + "')");
-                $('.secondaryImage').css('background-image', "url('" + user.picture.large + "')");
-                $('#userName').html(user.name.first + ' ' + user.name.last);
-                $('#gender').html(user.gender);
-                $('#email').html(email);
-                $('#phone').html(user.phone);
-                $('#location').html(user.location.street);
-                $('#shortBio').html("I'm " + user.dob.age + " years old");
-                app.animateCSS('.secondaryImage', 'flipInY');
-                app.animateCSS('.mainImage', 'fadeIn');
-            })
-
+            $('.mainImage').css('background-image', "url('" + app.images[user.login.uuid].src + "')");
+            $('.secondaryImage').css('background-image', "url('" + app.images[user.login.uuid].src + "')");
+            $('#userName').html(user.name.first + ' ' + user.name.last);
+            $('#gender').html(user.gender);
+            $('#email').html(email);
+            $('#phone').html(user.phone);
+            $('#location').html(user.location.street);
+            $('#shortBio').html("I'm " + user.dob.age + " years old");
+            app.animateCSS('.secondaryImage', 'pulse');
         }
     })
-
-
 
 }
 
@@ -58,11 +53,20 @@ app.init = () => {
             const rendered = Mustache.render(template, data);
             $('#userList').html(rendered);
             app.animateCSS('#userList', 'fadeIn');
+
+            let newImage;
+
+            data.results.map(user => {
+                newImage = new Image();
+                newImage.src = user.picture.large;
+                app.images[user.login.uuid] = newImage;
+            })
+
         }
     });
 
     $('#select').on('change', (e, element) => {
-        const gender = $('#select').val();        
+        const gender = $('#select').val();
 
         app.json.results.map(user => {
 
