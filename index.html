@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
+    <link href="//cdn.muicss.com/mui-0.9.41/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.9.41/js/mui.min.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/main.js"></script>
+    <title>AthenaWorks Exam</title>
+</head>
+
+<body>
+    <div class="mui-container-fluid">
+        <div class="mui-row">
+            <div class="mui-col-xs-12 mui-col-md-7">
+                <br>
+                <h2>Users</h2>
+                <div class="mui--text-subhead mui--text-dark-secondary ">If you wat to get contact information to specific user, just select group and then select him from the list below</div>
+                <br>
+                <form class="mui-form">
+                    <ul class="mui-list--inline">
+                        <li><label class="mui--text-subhead ">Select group of users:</label></li>
+                        <li>
+                            <div class="mui-select">
+                                <select id="select">
+                                    <option value="all">All</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+                <div class="loader animated infinite bounceIn">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <ul class="mui-list--inline animated" id="userList">
+                </ul>
+            </div>
+            <div class="mui-col-xs-12 mui-col-md-5 borderLeft ">
+                <div class="mainImage animated"></div>
+                <div class="secondaryImage animated"></div>
+                <div class="secondaryImageInfo mui--text-center">
+                    <ul class="mui-list--unstyled userData">
+                        <li>
+                            <h3 id="userName">Brittany Colleman</h3>
+                        </li>
+                        <li>
+                            <h4 id="gender">Student</h4>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="mui-list--unstyled info">
+                        <li class="mui--text-body1 mui--text-dark-secondary">
+                            Short bio
+                        </li>
+                        <li class="mui--text-title" id="shortBio">
+                            I love Strawberries, travel and photography.
+                        </li>
+                        <li class="mui--text-body1 mui--text-dark-secondary">
+                            The direction of the profession
+                        </li>
+                        <li class="mui--text-title" id="location">
+                            Tourism
+                        </li>
+                        <li class="mui--text-body1 mui--text-dark-secondary">
+                            Email Address
+                        </li>
+                        <li class="mui--text-title" id="email">
+                            brittany.colleman@gmail.com
+                        </li>
+                        <li class="mui--text-body1 mui--text-dark-secondary">
+                            Phone Number
+                        </li>
+                        <li class="mui--text-title" id="phone">
+                            501-520-025
+                        </li>
+                    </ul>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script id="listTemplate" type="x-tmpl-mustache">
+        {{#results}}
+           <li class="item1" onClick="app.userSelected('{{email}}')" id="{{login.uuid}}">
+              <ul class="mui-list--inline item2">
+                  <li>
+                      <img src="{{picture.thumbnail}}" class="thumbnail" />
+                  </li>
+                  <li class="mui--text-subhead"> {{name.first}} {{name.last}}</li>
+              </ul>
+          </li>
+      {{/results}}      
+  </script>
+</body>
+
+</html>
